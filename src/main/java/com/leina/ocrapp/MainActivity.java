@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,11 +20,13 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     // initialize layout objects
     ImageView imageView;
-    TextView textView;
+    TextView txt_detected;
     Button btn_capture;
     Button btn_detect;
     Bitmap imageBitmap;
@@ -35,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         // map to layout objects in xml layout
         imageView = findViewById(R.id.imageView_thumbnail);
-        textView = findViewById(R.id.textView_detected);
+        txt_detected = findViewById(R.id.textView_detected);
+        btn_detect = findViewById(R.id.btn_detect);
+        btn_capture = findViewById(R.id.btn_snap);
+
         btn_detect.setEnabled(false);
 
 
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         btn_detect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                detectImageText(); //
             }
         });
 
@@ -94,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(FirebaseVisionText firebaseVisionText) {
                 btn_detect.setEnabled(true);
 
+                processTextResult(firebaseVisionText);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -102,5 +109,24 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace(); // show error in logs
             }
         });
+    }
+
+    private void processTextResult(FirebaseVisionText text){
+        // list with text capture areas
+        List<FirebaseVisionText.TextBlock> blocks = text.getTextBlocks();
+
+        if (blocks.size() == 0) {
+            //short alert to show result message
+            Toast.makeText(this,"No text found",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //iterate through text blocks
+        for(FirebaseVisionText.TextBlock block : blocks){
+            String detected_text = block.getText();
+            txt_detected.setText(detected_text);
+
+        }
+
     }
 }
