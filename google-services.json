@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "508437050135",
+    "firebase_url": "https://ocrapp-5adae.firebaseio.com",
+    "project_id": "ocrapp-5adae",
+    "storage_bucket": "ocrapp-5adae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508437050135:android:38d4013813e1b2c3653d52",
+        "android_client_info": {
+          "package_name": "com.leina.OCRapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508437050135-t4iqsb6lavbn3mhc5gp3asrjtbi8hhmr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsogc_CKe5sHTTEQU1h_3139fS6FMDLKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508437050135-t4iqsb6lavbn3mhc5gp3asrjtbi8hhmr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
