@@ -12,15 +12,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn_capture;
     Button btn_detect;
     Bitmap imageBitmap;
+    AppBarLayout appBarLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         btn_capture = findViewById(R.id.btn_snap);
 
         btn_detect.setEnabled(false);
+
+        Toolbar top_bar = findViewById(R.id.top_app_bar);
+        setSupportActionBar(top_bar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Image Text Recognizer");
 
 
         //when you click capture function to take photo is called
@@ -80,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     //load thumbnail onto our activity's image view for preview
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");//convert captured image to bitmap
@@ -128,5 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        btn_detect.setEnabled(false);
     }
 }

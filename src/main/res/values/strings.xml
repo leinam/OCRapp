@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">OCRapp</string>
     <string name="thumbnail">Photo to be scanned.</string>
+    <string name="detected_words">Detected words</string>
+    <string name="capture">Capture</string>
+    <string name="detect_text">Detect Text</string>
 </resources>
